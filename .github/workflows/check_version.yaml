@@ -9,8 +9,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Run Version Check
         run: |
+          cd ../..
           version_to_release=$(git tag --sort=v:refname | tail -n 1)
           python_version=$(grep -oP '(?<=version = ")[^"]*' pyproject.toml)
           if ["$version_to_release" != "python_version"]; then
