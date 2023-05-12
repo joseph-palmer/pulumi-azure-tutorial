@@ -17,8 +17,8 @@ jobs:
         run: |
           release_version=$(git tag --sort=v:refname | tail -n 1)
           python_version=$(grep -oP '(?<=version = ")[^"]*' pyproject.toml)
-          echo "$release_version"
-          echo "$release_version"
+          echo "release_version=$release_version" >> "$GITHUB_ENV"
+          echo "python_version=$python_version" >> "$GITHUB_ENV"
   
       - name: Fail if pyproject version differs from release version
         if: ${{ env.release_version != env.python_version }}
