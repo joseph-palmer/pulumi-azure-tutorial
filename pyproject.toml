@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pulumi-azure-tutorial"
-version = "0.2.0"
+version = "0.2.2"
 description = "Example of code to deploy a static webpage to azure using pulumi"
 authors = ["joseph-palmer <22678593+joseph-palmer@users.noreply.github.com>"]
 readme = "README.md"
