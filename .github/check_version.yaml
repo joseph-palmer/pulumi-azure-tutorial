@@ -1,0 +1,22 @@
+name: Check Version on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  check_version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run Version Check
+        run: |
+          cd ../..
+          version_to_release=$(git tag --sort=v:refname | tail -n 1)
+          python_version=$(grep -oP '(?<=version = ")[^"]*' pyproject.toml)
+          if ["$version_to_release" != "python_version"]; then
+            echo "The version in pyproject.toml is different to the release tag"
+            exit 1
+          fi
