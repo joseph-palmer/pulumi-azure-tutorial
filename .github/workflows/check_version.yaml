@@ -25,3 +25,12 @@ jobs:
         run: |
           echo "Release version ($release_version) differs to the version in pyproject.toml ($python_version)"
           exit 1
+      
+      - name: Create Release
+        id: create_release
+        if: ${{ success() }}
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ env.release_version }}
+          release_name: Release ${{ env.release_version }}
+          draft: false
