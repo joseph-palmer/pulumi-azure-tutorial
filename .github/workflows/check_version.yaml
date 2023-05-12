@@ -16,9 +16,9 @@ jobs:
         run: |
           release_version=$(git tag --sort=v:refname | tail -n 1)
           python_version=$(grep -oP '(?<=version = ")[^"]*' pyproject.toml)
-          if ["$version_to_release" != "$python_version"]; then
+          if ["$version_to_release" == "$python_version"]; then
+            echo "release version and package version match"
+          else
             echo "Release version ($release_version) differs to the version in pyproject.toml ($python_version)"
             exit 1
-          else
-            echo "Release version ($release_version) is the same as the version in pyproject.toml ($python_version)"
           fi
