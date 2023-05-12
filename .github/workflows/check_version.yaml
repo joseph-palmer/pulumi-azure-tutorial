@@ -19,7 +19,7 @@ jobs:
           python_version=$(grep -oP '(?<=version = ")[^"]*' pyproject.toml)
           echo "release version is $version_to_release"
           echo "python version is $python_version"
-          if ["$version_to_release" != "$python_version"]; then
+          if [["$version_to_release" != "$python_version"]]; then
             echo "Versions differ"
             exit 1
           fi
