@@ -12,11 +12,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Run Version Check
+
+      - name: Get Versions
         run: |
           release_version=$(git tag --sort=v:refname | tail -n 1)
           python_version=$(grep -oP '(?<=version = ")[^"]*' pyproject.toml)
-          if [ "$version_to_release" != "$python_version" ]; then
-            echo "Release version ($release_version) differs to the version in pyproject.toml ($python_version)"
-            exit 1
-          fi
+  
+      - name: Fail if pyproject version differs from release version
+        if: ${{ env.release_version != env.python_version }}
+        run: |
+          echo "Release version ($release_version) differs to the version in pyproject.toml ($python_version)"
+          exit 1
+
