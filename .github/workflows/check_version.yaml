@@ -24,3 +24,8 @@ jobs:
           echo "Release version ($release_version) differs to the version in pyproject.toml ($python_version)"
           exit 1
 
+      - name: Continue if pyproject version differs from release version
+        if: ${{ env.release_version == env.python_version }}
+        run: |
+          echo "Release version ($release_version) differs to the version in pyproject.toml ($python_version)"
+
