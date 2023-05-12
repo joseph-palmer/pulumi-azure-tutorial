@@ -17,6 +17,8 @@ jobs:
           pwd
           version_to_release=$(git tag --sort=v:refname | tail -n 1)
           python_version=$(grep -oP '(?<=version = ")[^"]*' pyproject.toml)
+          echo "$version_to_release"
+          echo "$python_version"
           if ["$version_to_release" != "python_version"]; then
             echo "The version in pyproject.toml is different to the release tag"
             exit 1
