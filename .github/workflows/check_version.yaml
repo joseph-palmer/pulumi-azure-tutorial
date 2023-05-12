@@ -1,8 +1,9 @@
 name: Check Version on Release
 
 on:
-  release:
-    types: [published]
+  push:
+  # release:
+  #   types: [published]
 
 jobs:
   check_version:
